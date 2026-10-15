@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TOMS - ダッシュボード</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script src="../js/storage.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/dashboard.js" defer></script>
+
+</head>
+
+<body>
+
+    <div class="page-wrapper">
+
+        <!-- サイドバー -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+                <i class="fa-solid fa-train"></i>
+                TOMS
+            </div>
+
+            <nav class="menu">
+
+                <a href="dashboard.html" class="active">
+                    <i class="fa-solid fa-chart-line"></i>
+                    ダッシュボード
+                </a>
+
+                <a href="timetable.html">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    時刻表管理
+                </a>
+
+                <a href="trains.html">
+                    <i class="fa-solid fa-train-subway"></i>
+                    列車管理
+                </a>
+
+                <a href="delay.html">
+                    <i class="fa-solid fa-clock"></i>
+                    遅延・運休管理
+                </a>
+
+                <a href="incident.html">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    インシデント管理
+                </a>
+
+                <a href="vehicle.html">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    車両管理
+                </a>
+
+                <a href="report.html">
+                    <i class="fa-solid fa-chart-column"></i>
+                    レポート
+                </a>
+
+                <a href="settings.html">
+                    <i class="fa-solid fa-gear"></i>
+                    設定
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <!-- メイン -->
+
+        <main class="main-content">
+
+            <header class="header">
+
+                <div>
+                    <strong>
+                        JR 統合列車運行管理システム
+                    </strong>
+                </div>
+
+                <div id="currentDateTime">
+                    ----/--/-- --:--:--
+                </div>
+
+                <div>
+
+                    <i class="fa-solid fa-user"></i>
+
+                    運行管理者
+
+                </div>
+
+                <button
+                    class="btn"
+                    onclick="logout()">
+
+                    ログアウト
+
+                </button>
+
+            </header>
+
+            <br>
+
+            <!-- KPI -->
+
+            <section class="grid grid-4">
+
+                <div class="card stat-card green">
+
+                    <div>
+
+                        <h3>運行中</h3>
+
+                        <h1 id="runningCount">
+                            0
+                        </h1>
+
+                    </div>
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-train"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="card stat-card orange">
+
+                    <div>
+
+                        <h3>遅延</h3>
+
+                        <h1 id="delayCount">
+                            0
+                        </h1>
+
+                    </div>
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="card stat-card red">
+
+                    <div>
+
+                        <h3>運休</h3>
+
+                        <h1 id="cancelCount">
+                            0
+                        </h1>
+
+                    </div>
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-ban"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="card stat-card blue">
+
+                    <div>
+
+                        <h3>点検中</h3>
+
+                        <h1 id="inspectionCount">
+                            0
+                        </h1>
+
+                    </div>
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-wrench"></i>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <br>
+
+            <section class="dashboard-layout">
+
+                <!-- 路線図 -->
+
+                <div class="card map-panel">
+
+                    <h2>
+                        路線運行状況マップ
+                    </h2>
+
+                    <div class="rail-map">
+
+                        <div class="rail-line"></div>
+
+                        <div class="station">東京</div>
+                        <div class="station">神田</div>
+                        <div class="station">秋葉原</div>
+                        <div class="station">上野</div>
+                        <div class="station">日暮里</div>
+                        <div class="station">池袋</div>
+                        <div class="station">新宿</div>
+                        <div class="station">渋谷</div>
+                        <div class="station">品川</div>
+
+                    </div>
+
+                    <br>
+
+                    <div id="trainMap" class="train-map">
+
+                    </div>
+
+                </div>
+
+                <!-- 右側 -->
+
+                <div class="right-panel">
+
+                    <div class="card">
+
+                        <h2>
+                            お知らせ
+                        </h2>
+
+                        <ul class="notice-list">
+
+                            <li>
+                                14:20 中央線で遅延が発生しています
+                            </li>
+
+                            <li>
+                                13:50 山手線設備点検中
+                            </li>
+
+                            <li>
+                                12:10 京浜東北線は通常運転に復帰しました
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    <br>
+
+                    <div class="card">
+
+                        <h2>
+                            インシデント一覧
+                        </h2>
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>日時</th>
+                                    <th>区分</th>
+                                    <th>状態</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="incidentTable">
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
