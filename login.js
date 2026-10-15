@@ -1,19 +1,21 @@
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded", () => {
 
-const form=document.getElementById("loginForm");
+    initSampleData();
 
-form.addEventListener("submit",(e)=>{
+    const loginBtn =
+        document.getElementById("loginBtn");
 
-e.preventDefault();
+    loginBtn.addEventListener("click", () => {
 
-localStorage.setItem(
-"currentUser",
-"運行管理者"
-);
+        localStorage.setItem(
+            "tomsLogin",
+            "true"
+        );
 
-window.location.href=
-"pages/dashboard.html";
+        window.location.href =
+            "pages/dashboard.html";
+
+    });
 
 });
-
-});
+``

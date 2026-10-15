@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>TOMS - 車両管理</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-train"></i>
+            TOMS
+        </div>
+
+        <a href="dashboard.html"><div class="menu-item">ダッシュボード</div></a>
+        <a href="timetable.html"><div class="menu-item">時刻表管理</div></a>
+        <a href="trains.html"><div class="menu-item">列車管理</div></a>
+        <a href="delay.html"><div class="menu-item">遅延・運休管理</div></a>
+        <a href="incident.html"><div class="menu-item">インシデント管理</div></a>
+
+        <a href="vehicle.html">
+            <div class="menu-item active">
+                車両管理
+            </div>
+        </a>
+
+        <a href="report.html"><div class="menu-item">レポート</div></a>
+
+    </aside>
+
+    <main class="main-content">
+
+        <div class="top-header">
+
+            <h2>車両管理</h2>
+
+            <div class="header-right">
+
+                <span id="currentTime"></span>
+
+                <button
+                    id="logoutBtn"
+                    class="logout-btn">
+
+                    ログアウト
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <h3 class="panel-title">
+                車両登録
+            </h3>
+
+            <div class="form-grid">
+
+                <input
+                id="vehicleNo"
+                placeholder="車両番号">
+
+                <input
+                id="vehicleType"
+                placeholder="形式">
+
+                <input
+                id="depot"
+                placeholder="所属区所">
+
+                <input
+                type="date"
+                id="inspectionDate">
+
+                <select id="vehicleStatus">
+
+                    <option>運用中</option>
+                    <option>点検中</option>
+                    <option>入場中</option>
+                    <option>運用停止</option>
+
+                </select>
+
+            </div>
+
+            <br>
+
+            <button
+                id="addBtn"
+                class="save-btn">
+
+                登録
+
+            </button>
+
+        </div>
+
+        <div class="panel">
+
+            <input
+                type="text"
+                id="searchBox"
+                class="search-box"
+                placeholder="車両番号・形式・所属検索">
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th data-sort="vehicleNo">車両番号 ▲▼</th>
+
+                            <th data-sort="model">形式 ▲▼</th>
+
+                            <th data-sort="depot">所属 ▲▼</th>
+
+                            <th data-sort="inspection">検査期限 ▲▼</th>
+
+                            <th data-sort="status">状態 ▲▼</th>
+
+                            <th>アラート</th>
+
+                            <th>操作</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="vehicleTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<div
+id="editModal"
+class="modal">
+
+    <div class="modal-content">
+
+        <h2>車両編集</h2>
+
+        <br>
+
+        <input
+            type="hidden"
+            id="editId">
+
+        <div class="form-grid">
+
+            <input id="editVehicleNo">
+
+            <input id="editModel">
+
+            <input id="editDepot">
+
+            <input
+                type="date"
+                id="editInspection">
+
+            <select id="editStatus">
+
+                <option>運用中</option>
+                <option>点検中</option>
+                <option>入場中</option>
+                <option>運用停止</option>
+
+            </select>
+
+        </div>
+
+        <br>
+
+        <button
+            id="updateBtn"
+            class="save-btn">
+
+            更新
+
+        </button>
+
+        <button
+            id="closeModal"
+            class="logout-btn">
+
+            閉じる
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="../js/storage.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/vehicle.js"></script>
+
+</body>
+</html>

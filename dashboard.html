@@ -3,305 +3,320 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    <title>TOMS - ダッシュボード</title>
+<title>TOMS Dashboard</title>
 
-    <link rel="stylesheet" href="../css/style.css">
+<link
+rel="stylesheet"
+href="../css/style.css">
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <script src="../js/storage.js"></script>
-    <script src="../js/app.js"></script>
-    <script src="../js/dashboard.js" defer></script>
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 </head>
 
 <body>
 
-    <div class="page-wrapper">
+<div class="card-grid">
 
-        <!-- サイドバー -->
+    <div class="info-card">
+        <h3>運行中本数</h3>
+        <div
+            id="runningCount"
+            class="value success">0</div>
+    </div>
 
-        <aside class="sidebar">
+    <div class="info-card">
+        <h3>遅延本数</h3>
+        <div
+            id="delayCount"
+            class="value warning">0</div>
+    </div>
 
-            <div class="sidebar-logo">
-                <i class="fa-solid fa-train"></i>
-                TOMS
-            </div>
+    <div class="info-card">
+        <h3>運休本数</h3>
+        <div
+            id="stopCount"
+            class="value danger">0</div>
+    </div>
 
-            <nav class="menu">
+    <div class="info-card">
+        <h3>点検中車両</h3>
+        <div
+            id="vehicleCount"
+            class="value primary">0</div>
+    </div>
 
-                <a href="dashboard.html" class="active">
-                    <i class="fa-solid fa-chart-line"></i>
+    <div class="info-card">
+        <h3>重大インシデント</h3>
+        <div
+            id="emergencyCount"
+            class="value danger">0</div>
+    </div>
+
+</div>
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-train"></i>
+            TOMS
+        </div>
+
+        <nav>
+
+            <a href="dashboard.html">
+                <div class="menu-item active">
+                    <i class="fa-solid fa-gauge-high"></i>
                     ダッシュボード
-                </a>
+                </div>
+            </a>
 
-                <a href="timetable.html">
-                    <i class="fa-solid fa-calendar-days"></i>
+            <a href="timetable.html">
+                <div class="menu-item">
+                    <i class="fa-solid fa-clock"></i>
                     時刻表管理
-                </a>
+                </div>
+            </a>
 
-                <a href="trains.html">
+            <a href="trains.html">
+                <div class="menu-item">
                     <i class="fa-solid fa-train-subway"></i>
                     列車管理
-                </a>
+                </div>
+            </a>
 
-                <a href="delay.html">
-                    <i class="fa-solid fa-clock"></i>
-                    遅延・運休管理
-                </a>
-
-                <a href="incident.html">
+            <a href="delay.html">
+                <div class="menu-item">
                     <i class="fa-solid fa-triangle-exclamation"></i>
-                    インシデント管理
-                </a>
+                    遅延・運休管理
+                </div>
+            </a>
 
-                <a href="vehicle.html">
+            <a href="incident.html">
+                <div class="menu-item">
+                    <i class="fa-solid fa-bolt"></i>
+                    インシデント管理
+                </div>
+            </a>
+
+            <a href="vehicle.html">
+                <div class="menu-item">
                     <i class="fa-solid fa-screwdriver-wrench"></i>
                     車両管理
-                </a>
+                </div>
+            </a>
 
-                <a href="report.html">
+            <a href="report.html">
+                <div class="menu-item">
                     <i class="fa-solid fa-chart-column"></i>
                     レポート
-                </a>
+                </div>
+            </a>
 
-                <a href="settings.html">
+            <a href="settings.html">
+                <div class="menu-item">
                     <i class="fa-solid fa-gear"></i>
                     設定
-                </a>
-
-            </nav>
-
-        </aside>
-
-        <!-- メイン -->
-
-        <main class="main-content">
-
-            <header class="header">
-
-                <div>
-                    <strong>
-                        JR 統合列車運行管理システム
-                    </strong>
                 </div>
+            </a>
 
-                <div id="currentDateTime">
-                    ----/--/-- --:--:--
-                </div>
+        </nav>
 
-                <div>
+    </aside>
 
-                    <i class="fa-solid fa-user"></i>
+    <!-- Main -->
 
-                    運行管理者
+    <main class="main-content">
 
-                </div>
+        <!-- Header -->
+
+        <div class="top-header">
+
+            <div>
+
+                <h2>
+                    統合列車運行管理システム
+                </h2>
+
+            </div>
+
+            <div class="header-right">
+
+                <span id="currentTime"></span>
+
+                <span>
+                    運行管理者：admin
+                </span>
 
                 <button
-                    class="btn"
-                    onclick="logout()">
+                    id="logoutBtn"
+                    class="logout-btn">
 
                     ログアウト
 
                 </button>
 
-            </header>
+            </div>
 
-            <br>
+        </div>
 
-            <!-- KPI -->
+        <!-- Cards -->
 
-            <section class="grid grid-4">
+        <div class="card-grid">
 
-                <div class="card stat-card green">
+            <div class="info-card">
 
-                    <div>
+                <h3>
+                    運行中本数
+                </h3>
 
-                        <h3>運行中</h3>
+                <div
+                    id="runningCount"
+                    class="value success">
 
-                        <h1 id="runningCount">
-                            0
-                        </h1>
-
-                    </div>
-
-                    <div class="stat-icon">
-
-                        <i class="fa-solid fa-train"></i>
-
-                    </div>
+                    0
 
                 </div>
 
-                <div class="card stat-card orange">
+            </div>
 
-                    <div>
+            <div class="info-card">
 
-                        <h3>遅延</h3>
+                <h3>
+                    遅延本数
+                </h3>
 
-                        <h1 id="delayCount">
-                            0
-                        </h1>
+                <div
+                    id="delayCount"
+                    class="value warning">
 
-                    </div>
-
-                    <div class="stat-icon">
-
-                        <i class="fa-solid fa-clock"></i>
-
-                    </div>
+                    0
 
                 </div>
 
-                <div class="card stat-card red">
+            </div>
 
-                    <div>
+            <div class="info-card">
 
-                        <h3>運休</h3>
+                <h3>
+                    運休本数
+                </h3>
 
-                        <h1 id="cancelCount">
-                            0
-                        </h1>
+                <div
+                    id="stopCount"
+                    class="value danger">
 
-                    </div>
-
-                    <div class="stat-icon">
-
-                        <i class="fa-solid fa-ban"></i>
-
-                    </div>
+                    0
 
                 </div>
 
-                <div class="card stat-card blue">
+            </div>
 
-                    <div>
+            <div class="info-card">
 
-                        <h3>点検中</h3>
+                <h3>
+                    点検中車両
+                </h3>
 
-                        <h1 id="inspectionCount">
-                            0
-                        </h1>
+                <div
+                    id="vehicleCount"
+                    class="value primary">
 
-                    </div>
-
-                    <div class="stat-icon">
-
-                        <i class="fa-solid fa-wrench"></i>
-
-                    </div>
+                    0
 
                 </div>
 
-            </section>
+            </div>
 
-            <br>
+        </div>
 
-            <section class="dashboard-layout">
+        <!-- Route Map -->
 
-                <!-- 路線図 -->
+        <div class="panel">
 
-                <div class="card map-panel">
+            <h2 class="panel-title">
+                路線運行状況
+            </h2>
 
-                    <h2>
-                        路線運行状況マップ
-                    </h2>
+            <div
+                id="routeMap"
+                class="route-map">
 
-                    <div class="rail-map">
+            </div>
 
-                        <div class="rail-line"></div>
+        </div>
 
-                        <div class="station">東京</div>
-                        <div class="station">神田</div>
-                        <div class="station">秋葉原</div>
-                        <div class="station">上野</div>
-                        <div class="station">日暮里</div>
-                        <div class="station">池袋</div>
-                        <div class="station">新宿</div>
-                        <div class="station">渋谷</div>
-                        <div class="station">品川</div>
+        <div
+        style="
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:20px;">
 
-                    </div>
+            <!-- Notice -->
 
-                    <br>
+            <div class="panel">
 
-                    <div id="trainMap" class="train-map">
+                <h2 class="panel-title">
+                    お知らせ
+                </h2>
 
-                    </div>
+                <ul id="noticeList">
 
-                </div>
+                </ul>
 
-                <!-- 右側 -->
+            </div>
 
-                <div class="right-panel">
+            <!-- Incident -->
 
-                    <div class="card">
+            <div class="panel">
 
-                        <h2>
-                            お知らせ
-                        </h2>
+                <h2 class="panel-title">
+                    インシデント一覧
+                </h2>
 
-                        <ul class="notice-list">
+                <div
+                class="table-container">
 
-                            <li>
-                                14:20 中央線で遅延が発生しています
-                            </li>
+                    <table>
 
-                            <li>
-                                13:50 山手線設備点検中
-                            </li>
+                        <thead>
 
-                            <li>
-                                12:10 京浜東北線は通常運転に復帰しました
-                            </li>
+                            <tr>
 
-                        </ul>
+                                <th>発生日時</th>
+                                <th>区分</th>
+                                <th>内容</th>
+                                <th>状態</th>
 
-                    </div>
+                            </tr>
 
-                    <br>
+                        </thead>
 
-                    <div class="card">
+                        <tbody id="incidentTable">
 
-                        <h2>
-                            インシデント一覧
-                        </h2>
+                        </tbody>
 
-                        <table>
-
-                            <thead>
-
-                                <tr>
-
-                                    <th>日時</th>
-                                    <th>区分</th>
-                                    <th>状態</th>
-
-                                </tr>
-
-                            </thead>
-
-                            <tbody id="incidentTable">
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
+                    </table>
 
                 </div>
 
-            </section>
+            </div>
 
-        </main>
+        </div>
 
-    </div>
+    </main>
+
+</div>
+
+<script src="../js/storage.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/dashboard.js"></script>
 
 </body>
-
 </html>

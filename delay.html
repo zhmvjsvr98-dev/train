@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>TOMS - 遅延・運休管理</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-train"></i>
+            TOMS
+        </div>
+
+        <a href="dashboard.html">
+            <div class="menu-item">
+                <i class="fa-solid fa-gauge-high"></i>
+                ダッシュボード
+            </div>
+        </a>
+
+        <a href="timetable.html">
+            <div class="menu-item">
+                <i class="fa-solid fa-clock"></i>
+                時刻表管理
+            </div>
+        </a>
+
+        <a href="trains.html">
+            <div class="menu-item">
+                <i class="fa-solid fa-train"></i>
+                列車管理
+            </div>
+        </a>
+
+        <a href="delay.html">
+            <div class="menu-item active">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                遅延・運休管理
+            </div>
+        </a>
+
+        <a href="incident.html">
+            <div class="menu-item">
+                <i class="fa-solid fa-bolt"></i>
+                インシデント管理
+            </div>
+        </a>
+
+        <a href="vehicle.html">
+            <div class="menu-item">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                車両管理
+            </div>
+        </a>
+
+        <a href="report.html">
+            <div class="menu-item">
+                <i class="fa-solid fa-chart-column"></i>
+                レポート
+            </div>
+        </a>
+
+    </aside>
+
+    <main class="main-content">
+
+        <div class="top-header">
+
+            <h2>
+                遅延・運休管理
+            </h2>
+
+            <div class="header-right">
+
+                <span id="currentTime"></span>
+
+                <button
+                    id="logoutBtn"
+                    class="logout-btn">
+
+                    ログアウト
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <h3 class="panel-title">
+                遅延・運休登録
+            </h3>
+
+            <div class="form-grid">
+
+                <input
+                id="trainNo"
+                placeholder="列車番号">
+
+                <input
+                type="number"
+                id="delayMinutes"
+                placeholder="遅延時間（分）">
+
+                <input
+                type="datetime-local"
+                id="occurredTime">
+
+                <input
+                id="reason"
+                placeholder="理由">
+
+                <select id="status">
+
+                    <option>運行中</option>
+                    <option>遅延</option>
+                    <option>運休</option>
+
+                </select>
+
+            </div>
+
+            <br>
+
+            <button
+                id="addBtn"
+                class="save-btn">
+
+                登録
+
+            </button>
+
+        </div>
+
+        <div class="panel">
+
+            <input
+                type="text"
+                id="searchBox"
+                class="search-box"
+                placeholder="列車番号・理由検索">
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th data-sort="trainNo">
+                                列車番号 ▲▼
+                            </th>
+
+                            <th data-sort="minutes">
+                                遅延時間 ▲▼
+                            </th>
+
+                            <th data-sort="time">
+                                発生時刻 ▲▼
+                            </th>
+
+                            <th data-sort="reason">
+                                理由 ▲▼
+                            </th>
+
+                            <th data-sort="status">
+                                状態 ▲▼
+                            </th>
+
+                            <th>
+                                操作
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="delayTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<div
+id="editModal"
+class="modal">
+
+    <div class="modal-content">
+
+        <h2>編集</h2>
+
+        <br>
+
+        <input
+        type="hidden"
+        id="editId">
+
+        <div class="form-grid">
+
+            <input id="editTrainNo">
+
+            <input id="editMinutes">
+
+            <input
+            type="datetime-local"
+            id="editTime">
+
+            <input id="editReason">
+
+            <select id="editStatus">
+
+                <option>運行中</option>
+                <option>遅延</option>
+                <option>運休</option>
+
+            </select>
+
+        </div>
+
+        <br>
+
+        <button
+            id="updateBtn"
+            class="save-btn">
+
+            更新
+
+        </button>
+
+        <button
+            id="closeModal"
+            class="logout-btn">
+
+            閉じる
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="../js/storage.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/delay.js"></script>
+
+</body>
+</html>
